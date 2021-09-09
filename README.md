@@ -68,3 +68,35 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/d
 ### `npm run build` fails to minify
 
 This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+
+Thư viện hổ trợ
+    npm i --save-dev node-sass
+    npm i --save react-router-dom
+    npm i --save reactstrap
+    npm i --save react-select
+Tổ chức folder
+    src
+    |__ assets
+    |  |__ images
+    |  |__ styles (global styles) 
+    |
+    |__ components (shared components)
+    |
+    |__ features
+    |__ Photo
+        |__ components
+        |  |__ PhotoList
+        |  |__ PhotoCard
+        |  |__ PhotoForm
+        |
+        |__ pages
+        |  |__ MainPage
+        |  |__ AddEditPage
+        |__ photoSlice.js
+        |__ index.js
+Tổ chức routing
+    Sử dụng kĩ thuật lazy load components.
+    Load theo features.
+    formik
+    react-select 
+... link github: https://github.com/paulnguyen-mn/redux-photo-app

@@ -1,0 +1,17 @@
+.banner{
+    display: flex;
+    flex-direction:row;
+    justify-content: center;
+    align-items: center;
+    height: 15rem;
+
+    background-image: url(../../assets/images/banner-photos.png);
+    background-position: center;
+    background-size: cover;
+
+    &__title{
+        color: rgba(255, 255, 255, 0.85);
+        font-weight: bold;
+    }
+
+}
