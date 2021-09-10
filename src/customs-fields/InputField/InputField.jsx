@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { FormGroup, Input, Label } from 'reactstrap';
+import { FormFeedback, FormGroup, Input, Label } from 'reactstrap';
 
 InputField.propTypes = {
     field: PropTypes.object.isRequired,
@@ -25,6 +25,9 @@ function InputField(props) {
     }=props
     const {name, value, onChange, onBlur} = field;
 
+    const showError = form.errors[name] && form.touched[name]
+
+
     return (
         <FormGroup>
            {label && <Label for={name}>{label}</Label> }
@@ -37,8 +40,10 @@ function InputField(props) {
                 value={value}
                 onChange={onChange}
                 onBlur={onBlur}
+                invalid={showError}
                 //{...field}  tương ứng 4 dòng trên
             ></Input>
+            <FormFeedback>{form.errors[name]}</FormFeedback>
         </FormGroup>
     );
 }

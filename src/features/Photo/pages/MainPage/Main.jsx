@@ -1,5 +1,5 @@
 import React from 'react';
-import PropTypes from 'prop-types';
+// import PropTypes from 'prop-types';
 // import Images from '../../../../constans/images';
 // import Banner from '../../../../components/Banner/Banner';
 import Banner from 'components/Banner/Banner';

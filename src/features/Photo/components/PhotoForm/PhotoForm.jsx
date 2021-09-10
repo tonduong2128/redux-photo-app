@@ -1,15 +1,15 @@
 import React from 'react';
-import PropTypes from 'prop-types';
-import { Button, FormGroup, Input, Label } from 'reactstrap';
-import Select from 'react-select'
-// import { PHOTO_CATEGORY_OPTIONS } from '../../../../constans/global';
-import { PHOTO_CATEGORY_OPTIONS } from 'constans/global';
-// import Images from '../../../../constans/images';
-import Images from 'constans/images';
-import './PhotoForm.scss'
+// import PropTypes from 'prop-types';
+import { Button, FormGroup } from 'reactstrap';
 import { FastField, Form, Formik } from 'formik';
+import * as Yup from 'yup';
+import './PhotoForm.scss'
+
+import { PHOTO_CATEGORY_OPTIONS } from 'constans/global'; // đã config ở file jsconfig.js
 import InputField from 'customs-fields/InputField/InputField';
 import SelectField from 'customs-fields/SelectField/SelectField';
+import RandomPhotoField from 'customs-fields/RandomPhotoField/RandomPhotoField';
+
 
 PhotoForm.propTypes = {
     
@@ -22,16 +22,34 @@ function PhotoForm(props) {
         categoryId: null,
     }
 
+    const validationSchema=Yup.object().shape({
+            title: Yup.string()
+              .max(50, `Must be {50} characters or less`)
+              .required('This field is required'),
+
+            categoryId: Yup.string()
+              .required('This field is required').nullable(),
+              
+            photo: Yup.string().when('categoryId',{
+                is: '1',  
+                then: Yup.string().required('This field is required'),
+                otherwise: Yup.string().notRequired()
+            }),
+    })
+
+
     return (
         <Formik
             initialValues={initialValues} //????
+            validationSchema={validationSchema}
+            onSubmit={(value)=>{
+                console.log(value);
+            }}
         >
           {formikProps=>{
-
             const {values, errors, touched }=formikProps;
-            console.log({values, errors, touched });   
-
             return(<Form>
+
 
                     <FastField //chỉ rerender những cái thay đổi còn Fiedl thì rerender lại khi cái khác thay đổi
                         name="title"
@@ -50,16 +68,16 @@ function PhotoForm(props) {
                         options={PHOTO_CATEGORY_OPTIONS}
                     />
 
-                    <FormGroup>
-                        <Label for="categoryId">Photo</Label>
-                        <div><Button type="button" outline color="primary">Random a photo</Button></div>
-                        <div>
-                            <img width="200px" height="200px" src={Images.COLORFUL_BG} alt="color"></img>
-                        </div>
-                    </FormGroup>
+
+                    <FastField
+                        name="photo"
+                        component={RandomPhotoField}
+                        
+                        label="Photo"
+                    />
                     
                     <FormGroup>
-                        <Button color="primary">Add to album </Button>
+                        <Button type="submit" color="primary">Add to album </Button>
                     </FormGroup>
                 </Form>)
               }

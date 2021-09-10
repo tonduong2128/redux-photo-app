@@ -1,5 +1,5 @@
 import React from 'react';
-import PropTypes from 'prop-types';
+// import PropTypes from 'prop-types';
 import {Container ,Row ,Col } from 'reactstrap';
 import { NavLink } from 'react-router-dom';
 
@@ -20,6 +20,7 @@ function Header(props) {
                             href="https://www.facebook.com/TonDuong.IT"
                             target="_blank" // mở tab mới
                             // ref="noopener noreferrer"
+                            rel="noreferrer"
                         >
                             Created by Ton Duong
                         </a>

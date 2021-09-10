@@ -5,7 +5,6 @@ import {
   Redirect,
   Switch,
   Route,
-  Link
 } from "react-router-dom";
 import NotFound from './components/NotFound/NotFound';
 import Header from './components/Header/Header'
