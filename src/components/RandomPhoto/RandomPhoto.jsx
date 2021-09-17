@@ -18,7 +18,7 @@ RandomPhoto.defaultProps={
 }
 
 const getRandomImageUrl=()=>{
-    const randomId=Math.trunc(Math.random() * 200);
+    const randomId=Math.trunc(Math.random() * 2000);
     return `https://picsum.photos/id/${randomId}/300/300`
 }
 
@@ -47,7 +47,11 @@ function RandomPhoto(props) {
                 </Button>
             </div>
             <div className="random-photo__photo">
-                {imageUrl && <img src={imageUrl} alt="Opps"/>}
+                {imageUrl && <img 
+                        src={imageUrl} 
+                        alt="Opps"
+                        onError={handleRandomPhotoClick}
+                    />}
             </div>
 
         </div>

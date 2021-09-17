@@ -1,6 +1,6 @@
 import React from 'react';
 // import PropTypes from 'prop-types';
-import { Button, FormGroup } from 'reactstrap';
+import { Button, FormGroup, Spinner } from 'reactstrap';
 import { FastField, Form, Formik } from 'formik';
 import * as Yup from 'yup';
 import './PhotoForm.scss'
@@ -16,25 +16,24 @@ PhotoForm.propTypes = {
 };
 
 function PhotoForm(props) {
-
-    const initialValues={
-        title:'',
-        categoryId: null,
-    }
+    
+    const {initialValues}=props;
 
     const validationSchema=Yup.object().shape({
             title: Yup.string()
-              .max(50, `Must be {50} characters or less`)
+              .max(100, `Must be {50} characters or less`)
               .required('This field is required'),
 
             categoryId: Yup.string()
               .required('This field is required').nullable(),
               
-            photo: Yup.string().when('categoryId',{
-                is: '1',  
-                then: Yup.string().required('This field is required'),
-                otherwise: Yup.string().notRequired()
-            }),
+            // photo: Yup.string().when('categoryId',{
+            //     is: '1',  
+            //     then: Yup.string().required('This field is required'),
+            //     otherwise: Yup.string().notRequired()
+            // })
+
+            photo: Yup.string().required('This field is required'),
     })
 
 
@@ -42,15 +41,12 @@ function PhotoForm(props) {
         <Formik
             initialValues={initialValues} //????
             validationSchema={validationSchema}
-            onSubmit={(value)=>{
-                console.log(value);
-            }}
+            onSubmit={props.onSubmit}
         >
           {formikProps=>{
-            const {values, errors, touched }=formikProps;
+            const { isSubmitting }= formikProps;
+
             return(<Form>
-
-
                     <FastField //chỉ rerender những cái thay đổi còn Fiedl thì rerender lại khi cái khác thay đổi
                         name="title"
                         component={InputField}
@@ -72,12 +68,15 @@ function PhotoForm(props) {
                     <FastField
                         name="photo"
                         component={RandomPhotoField}
-                        
                         label="Photo"
                     />
                     
                     <FormGroup>
-                        <Button type="submit" color="primary">Add to album </Button>
+                        <Button type="submit" color={initialValues.title? "success": "primary" } className="mt-2">
+                            { isSubmitting && <Spinner size="sm" color="light" >  </Spinner>}   
+                            
+                           {initialValues.title ? "Update photo":"Add to album" } 
+                        </Button>
                     </FormGroup>
                 </Form>)
               }

@@ -24,11 +24,12 @@ function SelectField(props) {
         field,form,
         options, placeholder, label, disabled
     }=props
-    const { name, value} = field;
-    const selectedOption = options.find(option=> options.value===value)
+    var { name, value} = field;
+    var selectedOption = options.find(option=> option.value===value)
     const showError = form.errors[name] && form.touched[name]
 
-    const handleSelectedOptionChange=(selectedOption)=>{
+    
+    var handleSelectedOptionChange=(selectedOption)=>{
         const selectedValue=selectedOption? selectedOption.value:selectedOption;
 
         const changeEvent= {

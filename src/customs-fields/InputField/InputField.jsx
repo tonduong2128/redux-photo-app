@@ -23,23 +23,21 @@ function InputField(props) {
         field, form,
         placeholder, label, type, disabled
     }=props
-    const {name, value, onChange, onBlur} = field;
-
+    const {name, onChange, onBlur} = field;
     const showError = form.errors[name] && form.touched[name]
-
-
-    return (
+    return (    
         <FormGroup>
-           {label && <Label for={name}>{label}</Label> }
+            {label && <Label for={name}>{label}</Label> }
             <Input 
                 placeholder={placeholder}
                 type={type}
                 disabled={disabled}
 
-                id={name} 
-                value={value}
+                id={name}
                 onChange={onChange}
+                // value={value}
                 onBlur={onBlur}
+                
                 invalid={showError}
                 //{...field}  tương ứng 4 dòng trên
             ></Input>
